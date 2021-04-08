@@ -1,51 +1,9 @@
 import React from 'react';
 
 class CartItem extends React.Component {
-    constructor() {
-        super();
-        this.state = {
-            price : 999,
-            title : 'Phone',
-            qty : 1,
-            img : ''
-        }
-    }
-
-    increaseQuantity = () => {
-        //we will use setState to update the object of the component and render it on screen 
-        //we will use this setState form when we don't have to use the previous state value
-        // this.setState({
-        //     qty : this.state.qty + 1;
-        // })
-
-        //setState form 2 - if prevState require use this
-        this.setState((prevState) => {
-            return{
-                qty : prevState.qty + 1
-            }
-        }, () => {
-            console.log('this.state', this.state);
-        });
-    }
-
-    decreaseQuantity = () => {
-
-        const {qty} = this.state;
-
-        if(qty === 0){
-            return;
-        }
-
-        this.setState((prevState) => {
-            return {
-                qty : prevState.qty - 1
-            }
-        });
-    }
-
 
     render() {
-        const {price, title, qty} = this.state;
+        const {price, title, qty} = this.props.product;
         return(
             <div className="cart-item">
                 <div className="left-block">
@@ -62,7 +20,7 @@ class CartItem extends React.Component {
                         alt="increase" 
                         className="action-icons" 
                         src="https://t4.ftcdn.net/jpg/01/07/62/07/240_F_107620769_UwNVSoXnKS4VNcOKoZjPohlEPn83oE38.jpg" 
-                        onClick = {this.increaseQuantity}
+                        onClick = {() => this.props.onIncreaseQuantity(this.props.product)}
                         />
                     
                     <img 
